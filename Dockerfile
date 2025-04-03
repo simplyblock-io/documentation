@@ -7,4 +7,7 @@ RUN pip install mike
 RUN pip install mkdocs-video
 RUN pip install mkdocs-meta-descriptions-plugin
 RUN pip install markdown-captions
+RUN pip install mkdocs-render-swagger-plugin
 RUN pip install jinja2
+RUN apk add --no-cache nodejs npm bash
+RUN npm install --global webpack webpack-cli mini-css-extract-plugin cssnano css-loader postcss-loader sass-loader sass tachyons-sass postcss-preset-env
