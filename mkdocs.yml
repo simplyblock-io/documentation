@@ -27,6 +27,9 @@ plugins:
   - social
   - glightbox
   - mkdocs-video
+  - render_swagger:
+      allow_arbitrary_locations: true
+      css: ../../../assets/stylesheets/swagger-ui.css
   - mkdocs-nav-weight:
       section_renamed: true
   - git-revision-date-localized:
