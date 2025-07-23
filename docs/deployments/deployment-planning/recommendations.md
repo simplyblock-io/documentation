@@ -5,8 +5,8 @@ weight: 29999
 
 ## Hardware Architecture Support
 
-Simplyblock storage nodes run on systems with both _ARM64_ and _x86_64_ (_Intel_, _AMD_) processors.
-Simplyblock control plane currently runs on _x86_64_ processors.
+- For the control plane, simplyblock **requires** x86-64 (AMD64 / Intel 64) compatible CPUs.
+- For the storage plane, simplyblock **supports** x86-64 (AMD64 / Intel 64) or ARM64 (AArch64) compatible CPUs.
 
 ## Virtualization Support
 
@@ -51,6 +51,7 @@ NVMe must support 4KB native block size and should be sized in between 1.9 TiB a
 high-performance storage, and rebuild times are higher. Within a single cluster, all NVMEs must be of the same size.
 Simplyblock is SSD-vendor agnostic but recommends NVMe devices of the same model within a cluster. This is not a hard
 requirement, in particular if new (replacement) devices are faster than the installed ones.
+
 
 ## Network
 
