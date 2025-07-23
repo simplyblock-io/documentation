@@ -11,7 +11,7 @@ weight: 29999
 ## Virtualization Support
 
 Both Simplyblock storage nodes and control plane nodes can run on virtualization. It has been tested on plain kvm, proxmox, nitro (aws ec2) and gcp. 
-For production and storage nodes, SR-IOV is required for NVMEs and NICs and dedicated cores must be exclusively assigned to the VMs (no over-provisioning).
+For production and storage nodes, _SR-IOV_ is required for NVMEs and NICs and dedicated cores must be exclusively assigned to the VMs (no over-provisioning).
 
 ## Deployment Models
 
@@ -30,11 +30,11 @@ available to the underlying operating system or other processes.
 | Control Plane   | 2       | 16 GB  | 4x 3750 GB               | 1 GBit/s            | 50 GB          | 3               | 
 *disaggregated mode
 
-!!! Important note
+!!! Warning
     On Storage Nodes, the vcpus must be dedicated to Simplyblock and will be isolated from the operating system so that no kernel-space or user-space 
     processes or interrupt handlers can be scheduled on these vcpu. 
 
-!!! Multiple Storage Nodes per Host
+!!! Info
     It is possible and recommended to deploy multiple storage nodes per host, if the node has more than one NUMA socket or if there are more than 32 cores  
     available per socket. During deployment, simplyblock detects the underlying configuration and prepares a configuration file with the recommended deployment, 
     including the recommended amount of storage nodes per host based on the detected configuration. This file is later processed when adding the nodes to the host; 
@@ -46,12 +46,19 @@ If 16 or more physical cores are available per storage node, it is highly recomm
 
 ## NVMEs
 
-NVMe must support 4KB native block size and should be sized in between 1.9 TiB and 7.68 TiB. While larger NVMe devices (32 and
-64 TiB) are generally supported, their performance profile and rebuild time are typically not in alignment with
-high-performance storage, and rebuild times are higher. Within a single cluster, all NVMEs must be of the same size.
-Simplyblock is SSD-vendor agnostic but recommends NVMe devices of the same model within a cluster. This is not a hard
-requirement, in particular if new (replacement) devices are faster than the installed ones.
+NVMe must support 4KB native block size and should be sized in between 1.9 TiB and 7.68 TiB. 
+Within a single cluster, all NVMEs must be of the same size.
+Simplyblock is SSD-vendor agnostic but recommends NVMe devices of the same vendor and model within a cluster. This is not a hard
+requirement, in particular if new (replacement) devices are faster than existing installed ones, but cluster performance converges to devices with lowest performance.
 
+!!! Warning
+    Simplyblock only works with non-partitioned entire NVMe devices (virtual via SRV-IO or physical) as back-storage. 
+    Individual NVME namespaces or partitions cannot be claimed by Simplyblock, only entire devices! 
+    Devices are not allowed to be mounted under Linux and entire devices will be low-level formatted and re-partioned during deployment.
+    Devices will be removed from the operating system control and will not show up any longer in _lsblk_ once Simplyblock storage nodes are running.
+
+!!! Info
+    It is required to low-level format devices with 4KB block size (_nvme format_ cmd choosing the correct _lbaf_) before deploying Simplyblock.
 
 ## Network
 
