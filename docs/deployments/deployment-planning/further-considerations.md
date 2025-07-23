@@ -1,6 +1,6 @@
 ---
 title: "Cloud Instance Recommendations"
-weight: 30400
+weight: 30000
 ---
 
 Simplyblock has been tested on and recommends the following instance types. There is generally no restriction on other instance types as long as they fulfill the system requirements. 
