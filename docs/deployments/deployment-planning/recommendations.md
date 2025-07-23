@@ -28,6 +28,7 @@ available to the underlying operating system or other processes.
 |-----------------|---------|--------|--------------------------|---------------------|----------------|-----------------|
 | Storage Node    | 8       | 32 GB  | 1x fully dedicated NVMe  | 10 GBit/s           | 10 GB          | 3               | 
 | Control Plane   | 2       | 16 GB  | 4x 3750 GB               | 1 GBit/s            | 50 GB          | 3               | 
+
 *disaggregated mode
 
 !!! Warning
@@ -62,15 +63,20 @@ requirement, in particular if new (replacement) devices are faster than existing
 
 ## Network
 
-In production, Simplyblock requires a __HA network__ for storage traffic (e.g. via LACP, Stacked Switches,
-MLAG, active/active or active/passive NICs, STP or MSTP).
-It is recommended to use a separate network interface, which should also be highly available, for network traffic. 
+In production, Simplyblock requires a __HA network__ for storage traffic (e.g. via LACP, Stacked Switches, MLAG, active/active or active/passive NICs, STP or MSTP).
 
-!!! Important Note
-    Simplyblock requires a TCP/IP network, and all storage nodes in a cluster and hosts connected should reside in the same _VLAN_ for performance reasons.
+Simplyblock implements NVMe over Fabrics (NVMe-oF) working over any Ethernet interconnect.
 
-For maximum performance and depending on the capacity of the NVMEs, a dedicated storage network bandwidth of at least 10
-gb/s is recommended per NVMe and not more than 10 NVMe are recommended per socket.
+!!! recommendation
+    Simplyblock recommends NVIDIA Mellanox network adapters (ConnectX-6 or higher). 
+
+For production, do not use software-defined switches such as Linux Bridge or OVS. Create an interface on top of a Linux bond over two ports of the NIC(s)  or using SRV-IO. 
+
+Also it is recommended to use a separate physical NIC with two ports (bonded) and a HA network for management traffic; A 1 gb/s network is sufficient and Linux Bridge may be used. 
+
+!!! warning
+    All storage nodes within a cluster and all hosts accessing storage  shall reside within the same hardware vlan. Avoid any gateways or proxies higher than L2 on 
+    the network path. 
 
 ## PCIe Version
 
@@ -80,6 +86,7 @@ PCIe 3.0 is a minimum requirement, and if possible, PCIe 4.0 or higher is recomm
 
 Simplyblock is numa-aware and can run on one or two socket systems. A minimum of one storage node per NUMA socket has to
 be deployed per host for production use cases. Each NUMA socket requires directly attached NVMe and NIC to deploy a storage node.
+
 
 ## Operating System Requirements
 
