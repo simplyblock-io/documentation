@@ -11,8 +11,9 @@ requirements are elaborated below, whether deployed on a private or public cloud
 The following sizing information is meant for production environments.
 
 !!! warning
-    If the sizing document discusses virtual CPUs (vCPUs), it means 0.5 physical CPUs. This corresponds to a typical
-    hyper-threaded CPU core x86-64. This also relates to how AWS EC2 cores are measured.
+    If the sizing document discusses virtual CPUs (vcpus), it means 0.5 physical CPUs. This corresponds to a typical
+    hyper-threaded CPU core x86-64. This also relates to how AWS EC2 cores are measured for x86-64, while in aws graviton (arm) a single vcpu corresponds to an 
+    entire core. It is recommended to switch of hyper-threading of cpu, if 32 or more vcpu are available per storage node. 
 
 ## Management Nodes
 
@@ -25,8 +26,8 @@ The following hardware sizing specifications are recommended:
 | Hardware        |                                                                                                                             |
 |-----------------|-----------------------------------------------------------------------------------------------------------------------------|
 | CPU             | Minimum 4 vCPUs, plus<ul><li>1 vCPU per 5 storage nodes</li><li>1 vCPU 500 logical volumes</li></ul>                        |
-| RAM             | Minimum 8 GiB, plus:<ul><li>1 GiB RAM per 5 storage nodes</li><li>1 GiB per 500 logical volumes</li></ul>                   |
-| Disk            | Minimum 35 GiB, plus:<ul><li>500 MiB per 100 cluster objects (storage nodes, devices, logical volumes, snapshots)</li></ul> |
+| RAM             | Minimum 16 GiB, plus:<ul><li>1 GiB RAM per 5 storage nodes</li><li>1 GiB per 500 logical volumes</li></ul>                   |
+| Disk            | Minimum 50 GiB, plus:<ul><li>500 MiB per 100 cluster objects (storage nodes, devices, logical volumes, snapshots)</li></ul> |
 | Node type       | Bare metal or virtual machine with a supported Linux distribution                                                           |
 | Number of nodes | For a production environment, a minimum of 3 management nodes is required.                                                  |
 
@@ -44,8 +45,8 @@ The following hardware sizing specifications are recommended:
 
 | Hardware |                                                                                                           |
 |----------|-----------------------------------------------------------------------------------------------------------|
-| CPU      | Minimum 5 vCPU                                                                                            |
-| RAM      | Minimum 4 GiB                                                                                             |
+| CPU      | Minimum 8 vCPU                                                                                            |
+| RAM      | Minimum 16 GiB                                                                                             |
 | Disk     | Minimum 10 GiB free space on boot volume                                                                  |
 
 ### Memory Requirements
@@ -65,8 +66,8 @@ The exact amount of memory is calculated when adding or restarting a node based 
 | Unit                                | Memory Requirement |
 |-------------------------------------|--------------------|
 | Fixed amount                        | 3 GiB              |
-| Per logical volume                  | 15 MiB             |
-| % of max. utilized capacity on node | 0.2%               |
+| Per logical volume                  | 25 MiB             |
+| % of max. cluster storage capacity  | 0.02%              |
 
 !!! info
     Example: A node has 10 NVMe devices with 8TB each. The cluster has 3 nodes and a total capacity of 240 TB.
@@ -110,11 +111,6 @@ write-ahead log structure and replaying the journal in case of an issue.
 
     Any partition must be removed from the NVMe devices prior to installing simplyblock. Furthermore, NVMe devices must
     be low-level formatted with a 4KB block size (lbaf: 12). More information can be found in [NVMe Low-Level Format](../../reference/nvme-low-level-format.md).
-
-## Caching Nodes (K8s only)
-
-In Kubernetes, simplyblock can be configured to deploy caching nodes. These nodes provide an ultra-low latency
-write-through cache to a disaggregated cluster, improving access latency substantially.
 
 | Hardware |                                                      |
 |----------|------------------------------------------------------|
