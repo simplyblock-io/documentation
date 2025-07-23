@@ -7,24 +7,15 @@ Before deploying simplyblock on a Kubernetes cluster, it is essential to ensure 
 infrastructure, software, and configuration requirements. Proper planning and preparation will help guarantee a smooth
 installation, optimal performance, and long-term stability of the simplyblock storage system.
 
+See [system requirements](), [node sizing]() and [recommended cloud instance types]() to prepare your infrastructure before the deployment. 
+
 This section outlines the key hardware and software prerequisites, including supported Kubernetes versions, required
 resources for management and storage nodes, necessary permissions, network configurations, and storage prerequisites.
 
 Verifying these requirements before installation will help avoid compatibility issues and ensure that Simplyblock
 integrates seamlessly with your Kubernetes deployment.
 
-## Node Sizing
-
-Simplyblock has certain requirements in terms of CPU, RAM, and storage. See the specific
-[Node Sizing](../deployment-planning/node-sizing.md) documentation to learn more.
-
 ## Control Plane
-
-Minimum 2 physical cores
-Minimum 8GiB
-35 GiB unused disk space
-Supported Linux distribution
-3 management nodes
 
 ```bash title="Create Management Cluster"
 {{ cliname }} cluster create
