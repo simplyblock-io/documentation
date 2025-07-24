@@ -5,21 +5,21 @@ weight: 10300
 
 Simplyblock is a highly flexible storage solution. It can be installed in a variety of different deployment models inside and outside of Kubernetes.
 
-## control plane deployment
+## control plane installation
 
-Each storage cluster requires a control plane to run. Multiple storage clusters can then be deployed and connected with a single control plane. The deployment of the control plane is independent of and preceeds the storage cluster deployments. See [Control Plane Deployment](install-simplyblock/install-cp.md).
+Each storage cluster requires a control plane to run. Multiple storage clusters may be connected with a single control plane. The deployment of the control plane always comes before storage cluster deployments. See [Control Plane Deployment](install-simplyblock/install-cp.md).
 
-For a production deployment of the control plane, the use of 3 virtual machines on hosts independent from the storage is recommended.
+For a production deployment of the control plane, the use of three virtual machines running on hosts in failure domains, which are different from each other and from the storage nodes (i.e. independent hosts or racks).
 
-## storage cluster deployment
+## storage node installation
 
 Storage nodes can be installed directly under Linux Rocky, Alma or RHEL version 9. A k8s worker must not be present in this case and a minimum os image is sufficient: [Install Simplyblock Storage Nodes](install-simplyblock/install-sn.md). This setup is not suitable for kubernetes [hyper-converged](../architecture/concepts/hyper-converged.md) deployments.
 
 It is also possible to __alternatively__ install Simplyblock storage nodes into existing k8s clusters, allowing for both hyper-converged, disaggregated and hybrid deployment models (see below Kubernetes). This alternative can be chosen, if storage is mainly provisioned via CSI driver (k8s workloads).
 
-## Client-Side Deployments
+## Initiator-Side Installation
 
-Single storage clusters can be used from within both k8s Clusters (CSI Driver), plain Linux (based on nvme-tcp) or ProxMox. See below.
+nvme-tcp volumes are attached over the network from k8s worker nodes via the csi driver, proxmox hypervisors via the proxmox driver and any other linux host using nvme-cli. 
 
 ## System requirements and Sizing
 
