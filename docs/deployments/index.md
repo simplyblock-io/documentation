@@ -7,7 +7,7 @@ Simplyblock is a highly flexible storage solution. It can be installed in a vari
 
 ## control plane deployment
 
-Each storage cluster requires a control plane to run. Multiple storage clusters can then be deployed and connected with a single control plane. The deployment of the control plane is independent of and preceeds the storage cluster deployment. See [Control Plane Deployment](kubernetes/prerequisites.md).
+Each storage cluster requires a control plane to run. Multiple storage clusters can then be deployed and connected with a single control plane. The deployment of the control plane is independent of and preceeds the storage cluster deployments. See [Control Plane Deployment](kubernetes/prerequisites.md).
 
 For a production deployment of the control plane, the use of 3 virtual machines on hosts independent from the storage is recommended.
 
@@ -55,24 +55,11 @@ and if deploying to either__aws__ or __gcp__:
     ---
 
     Bare-Metal deployments are either virtualized or physical host.
-    [:octicons-arrow-right-24: Install Storage Cluster](baremetal/install-simplyblock.md)<br/>
     [:octicons-arrow-right-24: Install Kubernetes CSI Driver](baremetal/install-simplyblock-csi.md)<br/>
 
--   :material-aws:{ .lg .middle } __ProxMox__
+-   :material-ProxMox:{ .lg .middle } __ProxMox__
 
     ---
-    [:octicons-arrow-right-24: Install Storage Cluster](aws-ec2/install-simplyblock.md)<br/>
-    [:octicons-arrow-right-24: Install Kubernetes CSI Driver](aws-ec2/install-simplyblock-csi.md)<br/>
-
--   :material-aws:{ .lg .middle } __Google Compute Engine__
-
-    ---
-    [:octicons-arrow-right-24: Install Storage Cluster](gcp/install-simplyblock.md)<br/>
-    [:octicons-arrow-right-24: Install Kubernetes CSI Driver](gcp/install-simplyblock-csi.md)<br/>
-
--   :material-hvac-off:{ .lg .middle } __Air Gapped__
-
-    ---
-
-    [:octicons-arrow-right-24: General Information](air-gap/index.md)
+    [:octicons-arrow-right-24: Install ProxMox Driver](aws-ec2/install-simplyblock.md)<br/>
+    <br/>
 </div>
