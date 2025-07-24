@@ -6,6 +6,14 @@ weight: 30000
 When planning the deployment of a simplyblock cluster, it is essential to plan the sizing of the nodes. The sizing
 requirements are elaborated below, whether deployed on a private or public cloud, or inside and outside of Kubernetes.
 
+!!! info
+    In cloud environments including gcp and aws, instance types are pre-configured. In general,  
+    there are no restrictions on instance types as long as these node sizing requirements and 
+    [system requirements]() are fullfilled by these instance types. For [hyper-converged]() 
+    deployments,  it is important that node sizing applies to the dedicated resources consumed by 
+    Simplyblock. Hyper-converged instances must provide enough of resources to satisfy both
+    Simplyblock and other compute demand including the k8s worker itself and the operating system.
+
 ## Sizing Assumptions
 
 The following sizing information is meant for production environments.
