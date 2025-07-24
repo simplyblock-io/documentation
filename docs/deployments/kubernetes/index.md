@@ -3,24 +3,11 @@ title: "Kubernetes"
 weight: 20100
 ---
 
-It is possible to either connect the Simplyblock CSI driver to a disaggregated deployment 
+Before installing Simplyblock for Kubernetes, the control plane must be installed and ready-to-use.
 
-Installing simplyblock into and using it with Kubernetes requires two or more components to be installed. The number
-of components depends on your deployment strategy and requirements.
+The Simplyblock CSI driver can be [installed](install-csi.md) used with an existing dissaggregated cluster. 
 
-For Kubernetes-related installations, simplyblock provides three deployment models: [hyper-converged (also known as
-co-located)](../../architecture/concepts/hyper-converged.md),
-[disaggregated](../../architecture/concepts/disaggregated.md), and a hybrid model which combines the best of the former
-two.
+However, it is also possible to install a Simplyblock storage cluster into an existing kubernetes cluster together with the CSI driver [hyperconverged deployment](k8s-hyperconverged.md) or to install a Simplyblock storage cluster into another kubernetes cluster, which is dedicated to the storage [dissaggregated deployment on kubernetes](k8s-disaggregated.md) and then install and connect the CSI driver from other kubernetes clusters only consuming the storage.
 
-## Installation
 
-After making sure that all requirements are fulfilled, you can start with the installation. Follow the necessary
-section depending on your chosen deployment model:
-
-- [Hyper-Converged Setup](k8s-hyperconverged.md)
-- [Disaggregated Setup](k8s-disaggregated.md)
-
-In either case, you start with installing the control plane, before going over to the actual storage cluster and
-the Kubernetes CSI driver.
 
