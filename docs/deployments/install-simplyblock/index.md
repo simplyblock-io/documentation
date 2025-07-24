@@ -1,3 +1,8 @@
+---
+title: "Install Simplyblock"
+weight: 30000
+---
+
 Installing simplyblock for production requires a few components to be installed, as well as a couple of configurations
 to secure the network, ensure the performance, and data protection in the case of hardware or software failures.
 
