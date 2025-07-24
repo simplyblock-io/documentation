@@ -28,6 +28,7 @@ Please read the following to prepare for the deployment:
     [System Requirements](deployment-planning/recommendations.md)<br/>
     [Node Sizing](deployment-planning/node-sizing.md)<br/>
     [Erasure Coding Configuration](deployment-planning/erasure-coding-scheme.md)<br/>
+    [Air Gapped Installation](docs/deployments/deployment-planning/air-gapped.md)<br/>
 
 and if deploying to either__aws__ or __gcp__:
     [Cloud Instance Types](deployment-planning/further-considerations.md)<br/>
