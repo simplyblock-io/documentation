@@ -13,9 +13,9 @@ For a production deployment of the control plane, the use of 3 virtual machines 
 
 ## storage cluster deployment
 
-Storage nodes can be installed directly under a plain linux operating system in a disaggregated deployment model. In this case, Linux Rocky, Alma or RHEL version 9 must be pre-installed. A k8s worker or cp must not be present: 
+Storage nodes can be installed directly under Linux Rocky, Alma or RHEL version 9. A k8s worker must not be present in this case and a minimum os image is sufficient: [Install Simplyblock Storage Nodes](docs/deployments/install-simplyblock/install-sn.md). This setup is not suitable for kubernetes [hyper-converged](docs/architecture/concepts/hyper-converged.md) deployments.
 
-It is also possible to alternatively install Simplyblock storage nodes into existing k8s clusters, allowing for hyper-converged, disaggregated and hybrid deployment models (see below Kubernetes). This alternative can be chosen, if storage is mainly provisioned via CSI driver (k8s workloads).
+It is also possible to __alternatively__ install Simplyblock storage nodes into existing k8s clusters, allowing for both hyper-converged, disaggregated and hybrid deployment models (see below Kubernetes). This alternative can be chosen, if storage is mainly provisioned via CSI driver (k8s workloads).
 
 ## Client-Side Deployments
 
@@ -40,8 +40,9 @@ and if deploying to either__aws__ or __gcp__:
 
     Kubernetes deployments include AWS' EKS and GCP's GKE.
 
+    [:octicons-arrow-right-24: Install CSI Driver Only](kubernetes/install-simplyblock/hyper-converged.md)<br/>    
     [:octicons-arrow-right-24: Hyper-Converged Setup](kubernetes/install-simplyblock/hyper-converged.md)<br/>
-    [:octicons-arrow-right-24: Disaggregated Setup](kubernetes/install-simplyblock/disaggregated.md)<br/>
+    [:octicons-arrow-right-24: Disaggregated Setup under Kubernetes](kubernetes/install-simplyblock/disaggregated.md)<br/>
     [:octicons-arrow-right-24: Hybrid Setup](kubernetes/install-simplyblock/hybrid.md)
 
 -   :material-linux:{ .lg .middle } __Plain Linux__
@@ -51,8 +52,6 @@ and if deploying to either__aws__ or __gcp__:
     You may use Simplyblock straight from the Linux Operating System via the kernel nvmf-tcp
     module. /reference/supported-linux-distributions/
     [:octicons-arrow-right-24: Install on Linux](docs/deployments/baremetal/install-simplyblock-linux.md/)<br/>
-    [:octicons-arrow-right-24: Supported Kernels](docs/deployments/baremetal/install-simplyblock-linux.md/)<br/>
-    [:octicons-arrow-right-24: Supported Distributions](docs//reference/supported-linux-kernels.md/)<br/>
 
 -   :material-ProxMox:{ .lg .middle } __ProxMox__
 
