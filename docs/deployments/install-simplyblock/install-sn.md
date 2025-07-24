@@ -1,3 +1,8 @@
+---
+title: "Install Storage Plane"
+weight: 34000
+---
+
 ## Storage Plane Installation
 
 The installation of a storage plane requires a functioning control plane. If no control plane cluster is available yet,
