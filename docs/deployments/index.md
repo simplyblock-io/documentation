@@ -25,13 +25,13 @@ Single storage clusters can be used from within both k8s Clusters (CSI Driver), 
 
 Please read the following to prepare for the deployment: 
 
-    [System Requirements](deployment-planning/recommendations.md)<br/>
-    [Node Sizing](deployment-planning/node-sizing.md)<br/>
-    [Erasure Coding Configuration](deployment-planning/erasure-coding-scheme.md)<br/>
-    [Air Gapped Installation](docs/deployments/deployment-planning/air-gapped.md)<br/>
+[System Requirements](deployment-planning/recommendations.md)
+[Node Sizing](deployment-planning/node-sizing.md)
+[Erasure Coding Configuration](deployment-planning/erasure-coding-scheme.md)
+[Air Gapped Installation](docs/deployments/deployment-planning/air-gapped.md)
 
-and if deploying to either__aws__ or __gcp__:
-    [Cloud Instance Types](deployment-planning/further-considerations.md)<br/>
+and if deploying to either aws or gcp:
+[Cloud Instance Types](deployment-planning/further-considerations.md)
 
 <div class="grid cards" markdown>
 
