@@ -35,7 +35,7 @@ More information on the control plane, storage plane, and the different node typ
 
 ## Network Preparation
 
-For network requirements, see [system requirements](../deployment-planning/recommendations/)
+For network requirements, see [system requirements](../deployment-planning/recommendations.md)
 
 Simplyblock recommends two individual network interfaces, one for the control plane and one for the storage plane.
 Hence, in the following installation description, we assume two separate subnets. To install simplyblock in your
