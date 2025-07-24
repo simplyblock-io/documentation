@@ -1,8 +1,3 @@
----
-title: "Air Gap Installation"
-weight: 20999
----
-
 Simplyblock can be installed in an air-gapped environment. However, the necessary images must be downloaded to
 install and run the control plane, the storage nodes, and the Kubernetes CSI driver. In addition, for Kubernetes
 deployments, you want to download or clone the 
