@@ -1,6 +1,6 @@
 ---
 title: "Air Gap Installation"
-weight: 40000
+weight: 30000
 ---
 
 Simplyblock can be installed in an air-gapped environment. However, the necessary images must be downloaded to
