@@ -1,3 +1,8 @@
+---
+title: "Install Control Plane"
+weight: 32000
+---
+
 ## Control Plane Installation
 
 The first step when installing simplyblock, is to install the control plane. The control plane manages one or more
