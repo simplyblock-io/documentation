@@ -25,7 +25,7 @@ For production and storage nodes, _SR-IOV_ is required for NVMEs and NICs and de
 
 ## Deployment Models
 
-Simplyblock allows deployment of storage nodes in disaggregated and a hyper-converged setups. The disaggregated setup requires dedicated hosts (bare metal or       vm) for the storage nodes. In hyper-converged setup within kubernetes, simplyblock storage nodes are co-located with other workloads on kubernetes workers.
+Simplyblock allows deployment of storage nodes in [disaggregated](docs/architecture/concepts/disaggregated.md) and a [hyper-converged](docs/architecture/concepts/hyper-converged.md) setups. The disaggregated setup requires dedicated hosts (bare metal or vm) for the storage nodes. In hyper-converged setup within kubernetes, simplyblock storage nodes are co-located with other workloads on kubernetes workers.
 The minimum system requirements below concern simplyblock only and must be dedicated to simplyblock. 
 
 ## Minimum System Requirements
@@ -69,7 +69,7 @@ requirement, in particular if new (replacement) devices are faster than existing
     Devices will be removed from the operating system control and will not show up any longer in _lsblk_ once Simplyblock storage nodes are running.
 
 !!! Info
-    It is required to low-level format devices with 4KB block size (_nvme format_ cmd choosing the correct _lbaf_) before deploying Simplyblock.
+    It is required to [low-level format devices](docs/reference/nvme-low-level-format.md) with 4KB block size before deploying Simplyblock.
 
 ## Network
 
@@ -124,11 +124,11 @@ Initiator is the operating system to which Simplyblock nvme volumes is attached 
 
 | Distribution               | Versions       |
 |----------------------------|----------------|
-| eks                        | 1.27 and higher|
-| gks                        | 1.27 and higher|
-| k3s                        | 1.27 and higher|
-| k8s (vanilla)              | 1.27 and higher|
-| openshift                  | 4.14 and higher|
+| eks                        | 1.28 and higher|
+| gks                        | 1.28 and higher|
+| k3s                        | 1.29 and higher|
+| k8s (vanilla)              | 1.28 and higher|
+| openshift                  | 4.15 and higher|
 
 # ProxMox Requirements
 
