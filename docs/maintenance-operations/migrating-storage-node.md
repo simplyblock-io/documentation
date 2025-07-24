@@ -26,9 +26,9 @@ To install the first stage of a storage node, the installation guide for the sel
 The process will diverge after executing the initial deployment command `{{ cliname }} storage-node deploy`.
 If the command finishes successfully, resume from the next section of this page.
 
-- [Kubernetes](../deployments/kubernetes/install-simplyblock/index.md)
+- [Kubernetes](../deployments/kubernetes/index.md)
 - [Bare Metal or Virtualized Linux](../deployments/baremetal/index.md)
-- [AWS EC2](../deployments/aws-ec2/index.md)
+
 
 ### Preparing the New Storage Host
 
