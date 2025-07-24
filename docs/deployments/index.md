@@ -13,19 +13,13 @@ For a production deployment of the control plane, the use of 3 virtual machines 
 
 ## storage cluster deployment
 
-Storage clusters have three main deployment options: hyper-converged (into existing k8s clusters together with the primary workloads), disaggregated (on plain Linux) and hybrid (with some hyper-converged nodes and some disaggregated ones).
+Storage nodes can be installed directly under a plain linux operating system in a disaggregated deployment model. In this case, Linux Rocky, Alma or RHEL version 9 must be pre-installed. A k8s worker or cp must not be present: 
 
-Hyper-converged deployments are only supported for CSI storage (not ProxMox). To use ProxMox in a hyper-converged setup, it has to be deployed to separate kvm/qemu VMs on ProxMox hypervisors using one of the disaggregated deployment options.
-
-The disaggregated deployment has two sub-options:
-- deployment on plain Linux (this option will be depricated in future releases!)
-- deployment into an existing, but dedicated (for Simplyblock) k8s cluster
-
-For the deployment of a storage cluster, it is possible to use both bare-metal hosts and VMs.
+It is also possible to alternatively install Simplyblock storage nodes into existing k8s clusters, allowing for hyper-converged, disaggregated and hybrid deployment models (see below Kubernetes). This alternative can be chosen, if storage is mainly provisioned via CSI driver (k8s workloads).
 
 ## Client-Side Deployments
 
-Single storage clusters can be used from within both k8s Clusters (CSI Driver), plain Linux (manual or custom management based on Linux NVME-TCP or ProxMox. See below.
+Single storage clusters can be used from within both k8s Clusters (CSI Driver), plain Linux (based on nvme-tcp) or ProxMox. See below.
 
 ## System requirements and Sizing
 
@@ -54,12 +48,15 @@ and if deploying to either__aws__ or __gcp__:
 
     ---
 
-    Bare-Metal deployments are either virtualized or physical host.
-    [:octicons-arrow-right-24: Install Kubernetes CSI Driver](baremetal/install-simplyblock-csi.md)<br/>
+    You may use Simplyblock straight from the Linux Operating System via the kernel nvmf-tcp
+    module. /reference/supported-linux-distributions/
+    [:octicons-arrow-right-24: Install on Linux](docs/deployments/baremetal/install-simplyblock-linux.md/)<br/>
+    [:octicons-arrow-right-24: Supported Kernels](docs/deployments/baremetal/install-simplyblock-linux.md/)<br/>
+    [:octicons-arrow-right-24: Supported Distributions](docs//reference/supported-linux-kernels.md/)<br/>
 
 -   :material-ProxMox:{ .lg .middle } __ProxMox__
 
     ---
-    [:octicons-arrow-right-24: Install ProxMox Driver](aws-ec2/install-simplyblock.md)<br/>
+    [:octicons-arrow-right-24: Install ProxMox Driver](docs/deployments/proxmox/index.md)<br/>
     <br/>
 </div>
