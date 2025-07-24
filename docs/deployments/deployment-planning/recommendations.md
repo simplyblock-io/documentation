@@ -37,7 +37,7 @@ available to the underlying operating system or other processes.
 | Node Type       | vCPU(s) | RAM    | Locally Attached Storage | Network Performance | Free Boot Disk | Number of Nodes | 
 |-----------------|---------|--------|--------------------------|---------------------|----------------|-----------------|
 | Storage Node    | 8       | 32 GB  | 1x fully dedicated NVMe  | 10 GBit/s           | 10 GB          | 3               | 
-| Control Plane   | 2       | 16 GB  | 4x 3750 GB               | 1 GBit/s            | 50 GB          | 3               | 
+| Control Plane   | 2       | 16 GB  | NA                       | 1 GBit/s            | 50 GB          | 3               | 
 
 *disaggregated mode
 
