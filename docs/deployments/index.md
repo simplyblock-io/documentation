@@ -28,7 +28,7 @@ Please read the following to prepare for the deployment:
 [System Requirements](deployment-planning/recommendations.md)
 [Node Sizing](deployment-planning/node-sizing.md)
 [Erasure Coding Configuration](deployment-planning/erasure-coding-scheme.md)
-[Air Gapped Installation](docs/deployments/deployment-planning/air-gapped.md)
+[Air Gapped Installation](docs/deployments/air-gapped.md)
 
 and if deploying to either aws or gcp:
 [Cloud Instance Types](deployment-planning/further-considerations.md)
@@ -41,21 +41,23 @@ and if deploying to either aws or gcp:
 
     Kubernetes deployments include AWS' EKS and GCP's GKE.
 
-    [:octicons-arrow-right-24: Install CSI Driver Only](kubernetes/install-csi.md)<br/>    
+    [:octicons-arrow-right-24: Install CSI Driver](kubernetes/install-csi.md)<br/>    
     [:octicons-arrow-right-24: Hyper-Converged Setup](kubernetes/k8s-hyperconverged.md)<br/>
-    [:octicons-arrow-right-24: Disaggregated Setup under Kubernetes](kubernetes/k8s-disaggregated.md)<br/>
+    [:octicons-arrow-right-24: k8s disaggregated Setup](kubernetes/k8s-disaggregated.md)<br/>
 
 -   :material-linux:{ .lg .middle } __Plain Linux__
 
     ---
 
-    You may use Simplyblock straight from the Linux Operating System via the kernel nvmf-tcp
-    module. /reference/supported-linux-distributions/
-    [:octicons-arrow-right-24: Install on Linux](baremetal/index.md/)<br/>
+    You may attach Simplyblock Storage manually to the Linux Operating System via the kernel nvmf-tcp
+    module. 
+
+    [:octicons-arrow-right-24: Attach storage to Linux](baremetal/index.md/)<br/>
 
 -   :material-ProxMox:{ .lg .middle } __ProxMox__
 
     ---
+    
     [:octicons-arrow-right-24: Install ProxMox Driver](proxmox/index.md)<br/>
     <br/>
 </div>
