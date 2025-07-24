@@ -6,7 +6,7 @@ weight: 29999
 !!! info
     In cloud environments including gcp and aws, instance types are pre-configured. In general,  
     there are no restrictions on instance types as long as these system  requirements and 
-    [node sizing requirements](docs/deployments/deployment-planning/node-sizing.md) are 
+    [node sizing requirements](node-sizing.md) are 
     fullfilled by these instance types. For [hyper-converged](docs/architecture/concepts/hyper-
     converged.md) deployments,  it is important that node sizing applies to the dedicated 
     resources consumed by Simplyblock. Hyper-converged instances must provide enough of resources 
@@ -25,7 +25,7 @@ For production and storage nodes, _SR-IOV_ is required for NVMEs and NICs and de
 
 ## Deployment Models
 
-Simplyblock allows deployment of storage nodes in [disaggregated](docs/architecture/concepts/disaggregated.md) and a [hyper-converged](docs/architecture/concepts/hyper-converged.md) setups. The disaggregated setup requires dedicated hosts (bare metal or vm) for the storage nodes. In hyper-converged setup within kubernetes, simplyblock storage nodes are co-located with other workloads on kubernetes workers.
+Simplyblock allows deployment of storage nodes in [disaggregated](../../architecture/concepts/disaggregated.md) and a [hyper-converged](../../architecture/concepts/hyper-converged.md) setups. The disaggregated setup requires dedicated hosts (bare metal or vm) for the storage nodes. In hyper-converged setup within kubernetes, simplyblock storage nodes are co-located with other workloads on kubernetes workers.
 The minimum system requirements below concern simplyblock only and must be dedicated to simplyblock. 
 
 ## Minimum System Requirements
@@ -69,7 +69,7 @@ requirement, in particular if new (replacement) devices are faster than existing
     Devices will be removed from the operating system control and will not show up any longer in _lsblk_ once Simplyblock storage nodes are running.
 
 !!! Info
-    It is required to [low-level format devices](docs/reference/nvme-low-level-format.md) with 4KB block size before deploying Simplyblock.
+    It is required to [low-level format devices](../../reference/nvme-low-level-format.md) with 4KB block size before deploying Simplyblock.
 
 ## Network
 
@@ -117,8 +117,8 @@ We are planning to support more operating systems, including multiple versions o
 
 Initiator is the operating system to which Simplyblock nvme volumes is attached over the network (the nvme-tcp client). The following requirements concern initiators:
 
-[Linux Distributions and Versions](docs/reference/supported-linux-distributions.md)
-[Linux Kernel Versions](docs/reference/supported-linux-kernels.md)
+[Linux Distributions and Versions](../../reference/supported-linux-distributions.md)
+[Linux Kernel Versions](../../reference/supported-linux-kernels.md)
 
 # Kubernetes Requirements
 
