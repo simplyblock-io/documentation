@@ -3,7 +3,7 @@ title: "Kubernetes"
 weight: 20100
 ---
 
-Before installing Simplyblock for Kubernetes, the control plane must be installed and ready-to-use.
+Before installing Simplyblock for Kubernetes, the [control plane](../install-simplyblock/install-cp.md) must be installed and ready-to-use.
 
 The Simplyblock CSI driver can be [installed](install-csi.md) used with an existing dissaggregated cluster. 
 
