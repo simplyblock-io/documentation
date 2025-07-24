@@ -7,7 +7,7 @@ weight: 32000
 
 The first step when installing simplyblock, is to install the control plane. The control plane manages one or more
 storage clusters. If an existing control plane is available and the new cluster should be added to it, this section
-can be skipped. Jump right to the [Storage Plane Installation](#storage-plane-installation).
+can be skipped. Jump right to the [Storage Plane Installation](install-sn.md).
 
 ### Firewall Configuration (CP)
 
@@ -15,8 +15,7 @@ Simplyblock requires a number of TCP and UDP ports to be opened from certain net
 to be disabled on management nodes.
 
 The following is a list of all ports (TCP and UDP) required to operate as a management node. Attention is required, as
-this list is for management nodes only. Storage nodes have a different port configuration. See the
-[Firewall Configuration](#firewall-configuration-sp) section for the storage plane.
+this list is for management nodes only. Storage nodes have a different port configuration.
 
 {% include 'control-plane-network-port-table.md' %}
 
