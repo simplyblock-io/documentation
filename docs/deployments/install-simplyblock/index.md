@@ -1,6 +1,6 @@
 ---
 title: "Install Simplyblock"
-weight: 30000
+weight: 20050
 ---
 
 Installing simplyblock for production requires a few components to be installed, as well as a couple of configurations
