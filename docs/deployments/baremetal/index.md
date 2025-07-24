@@ -6,17 +6,17 @@ weight: 20200
 Bare metal and virtualized installations are installations on physically dedicated hosts or virtual machines. These
 physical or virtual machines provide a Red Hat-based Linux installation version 9 (rocky, alma or rhel). Several steps, which are otherwise taken care of by the helm chart installing the csi driver, have to be performed manually on a host to which simplyblock storage is to be attached.
 
-# Install nvme client package
+### Install nvme client package
 
 ```bash title="Install nvme client package"
 sudo yum install nvme-cli
 ```
 
-# Load the kernel module
+### Load the kernel module
 
 {% include 'prepare-nvme-tcp.md' %}
 
-# Create a pool
+### Create a pool
 
 Before lvols can be created and connected, a storage pool is required. If a pool already exists, it can be reused. Otherwise, creating a storage
 pool can be created as following:
@@ -35,11 +35,11 @@ The last line of a successful storage pool creation returns the new pool id.
 ad35b7bb-7703-4d38-884f-d8e56ffdafc6 # <- Pool Id
 ```
 
-# create an lvol
+### create an lvol
 
-# connect the lvol
+### connect the lvol
 
-# format the lvol
+### format the lvol
 
 
 
