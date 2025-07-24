@@ -3,9 +3,6 @@ title: "Hyper-Converged Setup"
 weight: 50000
 ---
 
-<!-- include: install control plane documentation -->
-{% include 'install-control-plane.md' %}
-
 ## Storage Plane Installation
 
 Caching nodes, like storage nodes, require huge page memory to hold the internal state. Huge pages should be 2MiB in
