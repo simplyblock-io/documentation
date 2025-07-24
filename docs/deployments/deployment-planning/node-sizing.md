@@ -9,7 +9,8 @@ requirements are elaborated below, whether deployed on a private or public cloud
 !!! info
     In cloud environments including gcp and aws, instance types are pre-configured. In general,  
     there are no restrictions on instance types as long as these node sizing requirements and 
-    [system requirements]() are fullfilled by these instance types. For [hyper-converged]() 
+    [system requirements](docs/deployments/deployment-planning/recommendations.md) are fullfilled 
+    by these instance types. For [hyper-converged](docs/architecture/concepts/hyper-converged.md) 
     deployments,  it is important that node sizing applies to the dedicated resources consumed by 
     Simplyblock. Hyper-converged instances must provide enough of resources to satisfy both
     Simplyblock and other compute demand including the k8s worker itself and the operating system.
