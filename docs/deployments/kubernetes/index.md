@@ -22,9 +22,8 @@ Kubernetes deployments.
 After making sure that all requirements are fulfilled, you can start with the installation. Follow the necessary
 section depending on your chosen deployment model:
 
-- [Hyper-Converged Setup](install-simplyblock/hyper-converged.md)
-- [Disaggregated Setup](install-simplyblock/disaggregated.md)
-- [Hybrid Setup](install-simplyblock/hybrid.md)
+- [Hyper-Converged Setup](k8s-hyperconverged.md)
+- [Disaggregated Setup](k8s-disaggregated.md)
 
 In either case, you start with installing the control plane, before going over to the actual storage cluster and
 the Kubernetes CSI driver.
