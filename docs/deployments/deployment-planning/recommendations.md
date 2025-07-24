@@ -3,6 +3,16 @@ title: System Requirements
 weight: 29999
 ---
 
+!!! info
+    In cloud environments including gcp and aws, instance types are pre-configured. In general,  
+    there are no restrictions on instance types as long as these system  requirements and 
+    [node sizing requirements](docs/deployments/deployment-planning/node-sizing.md) are 
+    fullfilled by these instance types. For [hyper-converged](docs/architecture/concepts/hyper-
+    converged.md) deployments,  it is important that node sizing applies to the dedicated 
+    resources consumed by Simplyblock. Hyper-converged instances must provide enough of resources 
+    to satisfy both Simplyblock and other compute demand including the k8s worker itself and the 
+    operating system.
+
 ## Hardware Architecture Support
 
 - For the control plane, simplyblock **requires** x86-64 (AMD64 / Intel 64) compatible CPUs.
