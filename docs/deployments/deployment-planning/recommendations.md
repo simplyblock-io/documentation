@@ -97,10 +97,10 @@ PCIe 3.0 is a minimum requirement, and if possible, PCIe 4.0 or higher is recomm
 Simplyblock is numa-aware and can run on one or two socket systems. A minimum of one storage node per NUMA socket has to
 be deployed per host for production use cases. Each NUMA socket requires directly attached NVMe and NIC to deploy a storage node.
 
+## Operating System Requirements (control plane, storage nodes)
 
-## Operating System Requirements
+__control plane nodes__ as well as __storage nodes__ in disaggregated setup require one of the following: __rocky__, __rhel__ or __alma__, all in version __9__ (latest patch-level).
 
-The control plane nodes require one of the following: rocky, rhel or alma 9.
 The storage nodes require rocky, rhel or alma 9 in the disaggregated setup.
 
 In the hyper-converged setup, the following operating systems are supported:
@@ -110,7 +110,26 @@ In the hyper-converged setup, the following operating systems are supported:
 | Rocky                      | 9, 10    |
 | RHEL                       | 9, 10    |
 | Alma                       | 9, 10    |
-| Ubuntu                     | ???      |
-| Debian                     | ???      |
-| Talos                      | ???      |
 
+We are planning to support more operating systems, including multiple versions of Ubuntu, Talos and Debian with the next minor release.
+
+# Operating System Requirements (Initiator)
+
+Initiator is the operating system to which Simplyblock nvme volumes is attached over the network (the nvme-tcp client). The following requirements concern initiators:
+
+[Linux Distributions and Versions](docs/reference/supported-linux-distributions.md)
+[Linux Kernel Versions](docs/reference/supported-linux-kernels.md)
+
+# Kubernetes Requirements
+
+| Distribution               | Versions       |
+|----------------------------|----------------|
+| eks                        | 1.27 and higher|
+| gks                        | 1.27 and higher|
+| k3s                        | 1.27 and higher|
+| k8s (vanilla)              | 1.27 and higher|
+| openshift                  | 4.14 and higher|
+
+# ProxMox Requirements
+
+ProxMox is supported from version 8.0 and higher.
