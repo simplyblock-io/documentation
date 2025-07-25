@@ -118,6 +118,7 @@ We are planning to support more operating systems, including multiple versions o
 Initiator is the operating system to which Simplyblock nvme volumes is attached over the network (the nvme-tcp client). The following requirements concern initiators:
 
 [Linux Distributions and Versions](../../reference/supported-linux-distributions.md)
+
 [Linux Kernel Versions](../../reference/supported-linux-kernels.md)
 
 # Kubernetes Requirements
