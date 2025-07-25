@@ -141,7 +141,7 @@ The full list of parameters can be found [here](https://github.com/simplyblock-i
 
 Please note that the _storagenode.create_ parameter has to be set to _false_ (it's default) to deploy the CSI driver only.
 
-### Multi Cluster Support
+## Multi Cluster Support
 
 The Simplyblock CSI driver now offers **multi-cluster support**, allowing it to connect with multiple Simplyblock clusters. Previously, the CSI driver could only connect to a single cluster.
 
@@ -151,7 +151,7 @@ To enable interaction with multiple clusters, we've introduced two key changes:
 2.  **`simplyblock-csi-secret-v2` Secret:** A new Kubernetes secret, `simplyblock-csi-secret-v2`, is now used to store credentials for all configured Simplyblock clusters.
 
 
-#### Adding new cluster
+### Adding new cluster
 
 When the Simplyblock CSI driver is initially installed, typically using Helm:
 ```
@@ -215,7 +215,7 @@ metadata:
 type: Opaque
 ```
 
-### using multi cluster
+## using multi cluster
 
 With multi-cluster support enabled, it's highly recommended to create a separate storage class for each Simplyblock cluster. This provides clear segregation and management.
 
