@@ -3,7 +3,7 @@ title: "Hyper-Converged Setup"
 weight: 50000
 ---
 
-In the hyper-converged deployment, csi driver and 
+In the hyper-converged or hybrid deployment, csi driver (node-part) and storage nodes are at least partially co-located on the same hosts (k8s worker nodes). However, this does not mean that each worker node with the csi driver node-part has to become a storage node. This is rather defined by a node label. Also, it is possible to add dedicated storage worker nodes to the same kubernetes cluster for a hybrid deployment model. 
 
 
 ## Storage Plane Installation
