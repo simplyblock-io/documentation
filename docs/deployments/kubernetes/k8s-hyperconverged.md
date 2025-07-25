@@ -18,11 +18,19 @@ The storage cluster will however not have any storage nodes attached yet.
 System requirements for CSI-only (node part) installation can be found [here](install-csi.md#csi-driver-system-requirements).
 However, for nodes, which serve as storage nodes, the [following requirements](../deployment-planning/recommendations.md#operating-system-requirements-control-plane-storage-nodes) apply.
 
-## Retrieving the cluster secret
+## Retrieving credentials and creating a pool
+
+These are the [same steps](install-csi.md#getting-credentials) as for installation of the csi driver only.
+
+## Labeling Nodes
+
+Before the helm chart is installed, it is required to label all nodes, which shall be added as storage nodes (it is possible to label additional nodes later on to add them to the storage cluster, but cluster expansion in an HA model always requires two nodes to be added in pairs).  
 
 
 
-## Labelling Nodes
+## Networking Configuration
+
+
 
 ## Installing CSI Driver and Storage Nodes via Helm
 
