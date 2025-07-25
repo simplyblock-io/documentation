@@ -74,6 +74,8 @@ The last item necessary before deploying the CSI driver is the control plane add
 simplyblock API with an AWS load balancer service. Hence, your control plane address is the "public" endpoint of this
 load balancer.
 
+## Deploying the helm chart
+
 Anyhow, deploying the Simplyblock CSI Driver using the provided helm chart comes down to providing the four necessary
 values, adding the helm chart repository, and installing the driver.
 
