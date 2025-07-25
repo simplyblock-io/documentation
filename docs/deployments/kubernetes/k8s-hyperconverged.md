@@ -16,7 +16,7 @@ The storage cluster will however not have any storage nodes attached yet.
 ## CSI Driver and Storage Node System Requirements
 
 System requirements for CSI-only (node part) installation can be found [here](install-csi.md#csi-driver-system-requirements).
-However, for nodes, which serve as storage nodes, the [following requirements](../deployment-planning/recommendations.md#operating-system-requirements-control-plane-storage-nodes) apply. Also, other requirements such as for [networking](../deployment-planning/recommendations.md), [minimum system requirements](../deployment-planning/recommendations.md) and [node sizing](../deployment-planning/recommendations.md) apply.
+However, for nodes, which serve as storage nodes, the [following requirements](../deployment-planning/recommendations.md) apply. 
 
 ## Retrieving credentials and creating a pool
 
@@ -37,30 +37,18 @@ Multiple ports are required to be opened on storage node hosts. ports used with 
 | Service                     | Direction | Source / Target Network | Port(s)   | Protocol(s) |
 |-----------------------------|-----------|-------------------------|-----------|-------------|
 | ICMP                        | ingress   | control / storage       | -         | ICMP        |
-| Storage node API            | ingress   | control / storage       | 5000      | TCP         |
-| spdk-http-proxy             | ingress   | control / storage       | 8080-8180 | TCP         |
+| Storage node API            | ingress   | control / storage mgmt  | 5000      | TCP         |
+| spdk-http-proxy             | ingress   | control / storage mgmt  | 8080-8180 | TCP         |
 | hublvol-nvmf-subsys-port    | ingress   | storage / storage       | 9030-9059 | TCP         |
 | internal-nvmf-subsys-port   | ingress   | storage / storage       | 9060-9099 | TCP         |
-| lvol-nvmf-subsys-port       | ingress   | storage / storage       | 9100-9200 | TCP         |
+| lvol-nvmf-subsys-port       | ingress   | csi-node / storage      | 9100-9200 | TCP         |
 | SSH                         | ingress   | admin / storage         | 22        | TCP         |
-| FoundationDB                | egress    | storage / control       | 4500      | TCP         |
-| Graylog                     | egress    | storage / control       | 12202     | TCP         |
+| FoundationDB                | egress    | storage mgmt / control  | 4500      | TCP         |
+| Graylog                     | egress    | storage mgmt / control  | 12202     | TCP         |
 
 ## Installing CSI Driver and Storage Nodes via Helm
 
-Anyhow, deploying simplyblock using the provided helm chart comes down to providing the four necessary
-values, adding the helm chart repository, and installing the driver. In addition to the storage nodes, this will also
-install the Simplyblock CSI driver for seamless integration with the Kubernetes CSI persistent storage subsystem.
-
-To enable Kubernetes to decide where to install storage nodes, the helm chart uses a Kubernetes node label. This can be
-used to mark only specific nodes to act as storage nodes, or to use all nodes for the hyper-converged or hybrid setup. 
-
-
-
-!!! warning
-    The label must be applied to all nodes that operate as part of the storage plane.
-
-After labeling the nodes, the Helm chart can be deployed.
+In the easiest version, compared to the [installation of the csi driver only](install-csi.md) the installation of a storage node via helm  requires only one one additional parameter  _--set storagenode.create=true_:
 
 ```bash title="Install the helm chart"
 CLUSTER_UUID="<UUID>"
@@ -119,106 +107,62 @@ spdkcsi-controller-0   6/6     Running   0          30s
 spdkcsi-node-tzclt     2/2     Running   0          30s
 ```
 
-When the storage cluster nodes are deployed, it is recommended to apply CPU core isolation for highest performance to
-the Kubernetes worker nodes that act as storage node hosts.
+There are a number of other helm parameters, which are very important for storage node deployment in hyper-converged mode. The most important ones are:
 
-During the installation of the simplyblock controller, a configuration file with the system configuration has been
-created. To apply core isolation to the Kubernetes worker, an SSH login to the worker node is required.
+| Parameter                      | Description                                            | Default  | 
+|--------------------------------|--------------------------------------------------------|----------|
+| _storagenode.ifname_           | the interface name of the mgmt ifc (traffic btw.       | eth0     | 
+|                                | storage nodes and control plane, see storage mgmt vlan |          |
+|                                | above). HA ports and nw are required in prd, but can   |          |                        |                                | low bw (e.g. 1 gb/s).                                  |          |   |_storagenode.maxLogicalVolumes_ | Max. number of lvols allowed to connect to sn.         | 10       |                        |                                | Each lvol requires about 25MiB of RAM. Can be          |          |
+|                                | changed later only on node restart.                    |          |
+|_storagenode.maxSize_           | Maximum utilized storage capacity through this sn.     | 150g     | 
+|                                | A conservative setting is the exp. cluster capacity.   |          |
+|                                | This setting has significant impact on RAM demand:     |          |
+|                                | 0.02% of maxSixe is required in add. RAM.              |          |
+|_storagenode.isolateCores_      | isolation of cores used by simplyblock from other      | false    | 
+|                                | processes and system, including IRQs, can significantly|          |
+|                                | increase performance. core isolation requires worker   |          |
+|                                | node reboot after deployment is completed. changes are |          |
+|                                | performed via privileged container on OS-level (grub). |          |              
+|_storagenode.dataNics_          | Optional. name of ifc for storage nw. (traffic inside  |          |
+|                                | of storage cluster and btw. csi-nodes and storage nodes|          |
+|                                | HA ports and nw are required for prd.                  |          |
+|_storagenode.pciAllowed_        |                                                        |          |       
+|_storagenode.pciBlocked_        |                                                        |          |       
+|_storagenode.socketsToUse_      | Simplyblock is NUMA aware. If your worker node has     |    1     |
+|                                | more than 1 socket, it is possible to deploy more      |          |
+|                                | than one simplyblock storage node per host             |          |
+|                                | (typically one per socket), depending on the           |          |
+|                                | distribution of nvme and nic across sockets and the    |          |
+|                                | resource demand of other workloads.                    |          |
+|_storagenode.nodesPerSocket_    | It is possible to deploy 1 or 2                        |    1     |  
+|                                | storage nodes per socket. 2 sense if one               |          |
+|                                | each socket has a cpu with more than 32 cores.         |          | 
+|_storagenode.coresPercentage_   | This is the percentage of total cores (vcpu), which    |          | 
+|                                |will be reserved for the Simplyblock Storage            |          | 
+|                                |Node Services. Make sure that the percentage            |          | 
+|                                |leads to at least 8 vcpu per storage node.              |          | 
+|                                |For example, if a host has 128 vcpu on two sockets      |          | 
+|                                |(64 per socket) and socketsToUse=2 and nodesPerSocket=1,|          | 
+|                                |you need to specify at least 13% (as 13%*64>8 and 8 is  |          | 
+|                                |the minimum amount of vcpu required). Simplyblock       |          | 
+|                                | does not use more than 32 vcpu per node efficiently.   |          | 
 
 
-    ```
-
-!!! notes
-    Potentially, the number of CPU cores, assigned to simplyblock, should be adjusted. This is especially true for
-    hyper-converged setups. Simplyblock, by default, will take all CPUs but 20% for itself. To change number of CPUs,
-    the [Change the number of CPUs](#changing-the-number-of-utilized-cpu-cores) section explains the necessary steps
-    which should be executed before following up here.
+!!! warning
+    The resources consumed by Simplyblock are dedicated and have to be aligned with resources required
+    by other workloads. The minimum requirements are described [here](../deployment-planning/recommendations.md) and a sizing 
+    guide (vcpu, ram) per storage node can be found [here](../deployment-planning/node-sizing.md). Minimum requirements as 
+    well as vcpu sizing guidelines contain resources for the containers used by Simplyblock and a minimal system itself, but 
+    no other user or system processes. 
     
-Following the installation of _tuned_, the tuning profile file must be created. The following snippet automates the
-creation based on the generated configuration file.
-
-```bash title="Generate the core isolation tuning profile"
-sudo -i
-SIMPLYBLOCK_CONFIG="/var/simplyblock/sn_config_file"
-pip install -y yq jq
-ISOLATED=$(yq '.isolated_cores' ${SIMPLYBLOCK_CONFIG} | jq -r '. | join(",")'); echo "isolcpus=${ISOLATED}"
-mkdir -p /etc/tuned/realtime
-cat << EOF > /etc/tuned/realtime/tuned.conf
-[main]
-include=latency-performance
-[bootloader]
-cmdline_add=isolcpus={$ISOLATED} nohz_full={$ISOLATED} rcu_nocbs={$ISOLATED}
-EOF
-```
-
-Now the profile file must be applied and the worker node restarted.
-
 !!! info
-    Remember to drain potentially remaining services on the Kubernetes worker node before rebooting.
-
-```bash title="Apply the profile and reboot"
-sudo systemctl enable tuned
-sudo systemctl start tuned
-sudo tuned-adm profile realtime
-sudo reboot 
-```
-
-#### Install the Storage Nodes
-
-Last but not least, install the actual storage nodes into Kubernetes via Helm.
-
-```bash
-helm install -n simplyblock \
-    simplyblock-controller/sb-controller \
-    --set storagenode.create=true
-```
-
-#### Changing the Number of Utilized CPU Cores
-
-!!! info
-    The following section is optional and only required if additional services share the same machine, as happens in
-    a hyper-converged setup.
-
-By default, simplyblock assumes that the whole host is available to it and will configure itself to use everything
-but 20% of the host. In hyper-converged setups, this assumption is not true and the number of utilized CPU cores must
-be adjusted.
-
-To adjust the number of CPU cores, an SSH login to the Kubernetes worker node is required. After logging in, the
-configuration file at _/var/simplyblock/sn_config_file_ must be updated.
-
-```bash title="Open the configuration file in VI"
-vi /var/simplyblock/sn_config_file
-```
-
-Inside the configuration file, the _cpu_mask_ value must be updated to represent the number and assignment of cores to
-be used by simplyblock. To create the required CPU mask, the [CPU Mask Calculator](../../reference/cpumask-calculator.md)
-can be used. 
-
-```json title="Updating the CPU Mask configuration"
-{
-    "nodes": [
-        {
-            "socket": 0,
-            "cpu_mask": "0xfffbffc",
-            "isolated": [
-                2,
-                3,
-                4,
-                5,
-                ...
-            ]
-        }
-    ]
-}
-```
-
-After saving the file and exiting _vi_, the new configuration must be applied. For simplicity, this shell script at
-[GitHub](https://github.com/simplyblock-io/simplyblock-csi/blob/master/scripts/config-gen-upgrade.sh) automates the
-creation and submission of the Kubernetes job.
-
-```bash title="Apply the configuration change"
-curl -s -L https://raw.githubusercontent.com/simplyblock-io/simplyblock-csi/refs/heads/master/scripts/config-gen-upgrade.sh | bash
-```
+    The RAM requirement itself is split in between huge page memory and system memory. However, this is transparent for
+    users, Simplyblock takes care of allocating, reserving and freeing huge pages as part of the overall ram it 
+    uses. The total amount of ram required depends on the number of vcpu used, the number of active lvols (pvcs) and the
+    utilized virtual storage on this node (this is not the storage provided on the node, but the storage connected to via 
+    this node!).
 
 
-{% include 'kubernetes-install-storage-node-helm.md' %}
+
+
