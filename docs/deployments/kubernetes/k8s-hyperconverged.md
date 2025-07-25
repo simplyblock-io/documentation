@@ -20,7 +20,7 @@ However, for nodes, which serve as storage nodes, the [following requirements](.
 
 ## Retrieving credentials and creating a pool
 
-These are the [same steps](install-csi.md#getting-credentials) as for installation of the csi driver only.
+[see here](install-csi.md#getting-credentials) 
 
 ## Labeling Nodes
 
