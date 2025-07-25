@@ -3,6 +3,9 @@ title: "Hyper-Converged Setup"
 weight: 50000
 ---
 
+In the hyper-converged deployment, csi driver and 
+
+
 ## Storage Plane Installation
 
 Caching nodes, like storage nodes, require huge page memory to hold the internal state. Huge pages should be 2MiB in
