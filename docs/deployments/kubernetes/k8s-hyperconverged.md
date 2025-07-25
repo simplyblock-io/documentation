@@ -3,10 +3,19 @@ title: "Hyper-Converged Setup"
 weight: 50000
 ---
 
-In the hyper-converged or hybrid deployment, csi driver (node-part) and storage nodes are at least partially co-located on the same hosts (k8s worker nodes). However, this does not mean that each worker node with the csi driver node-part has to become a storage node. This is rather defined by a node label. Also, it is possible to add dedicated storage worker nodes to the same kubernetes cluster for a hybrid deployment model. 
+In the hyper-converged or hybrid deployment, csi driver (node-part) and storage nodes are at least partially co-located on the same hosts (k8s worker nodes). 
+
+!!! info
+    However, this does not mean that each worker node with the csi driver node-part has to become a storage node. This is  
+    rather defined by a node label. Also, it is possible to add dedicated storage worker nodes to the same kubernetes cluster 
+    for a hybrid deployment model. 
+
+    As for the plain CSI driver installation, the control plane must be present and a storage cluster must have been created. 
+    The storage cluster will however not have any storage nodes attached yet.
+
+## CSI Driver and Storage Node System Requirements
 
 
-## Storage Plane Installation
 
 Caching nodes, like storage nodes, require huge page memory to hold the internal state. Huge pages should be 2MiB in
 size, and a minimum of 4096 huge pages should be allocated at boot time of the operating system.
