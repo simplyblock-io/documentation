@@ -3,7 +3,18 @@ title: "Install Simplyblock CSI"
 weight: 30200
 ---
 
-Simplyblock provides a seamless integration with Kubernetes through its Kubernetes CSI driver.
+Simplyblock provides a seamless integration with Kubernetes through its Kubernetes CSI driver. For system requirements, see 
+
+[Linux Distributions and Versions](../../reference/supported-linux-distributions.md)
+
+[Linux Kernel Versions](../../reference/supported-linux-kernels.md)
+
+Before installing the Kubernetes CSI Driver, a control plane must be present and a storage cluster must have been created.
+
+In this section we explain how to install a CSI driver and connect it to a disaggregated storage cluster, which must already exist prior to the CSI driver installation. The disaggregated cluster can be installed on [plain linux hosts](../install-simplyblock/install-sn.md) or into an [existing kubernetes cluster](k8s-disaggregated.md), but it is not co-located on the same k8s worker nodes with the CSI driver installation. 
+
+If you are interested in co-located (hyper-converged) deployment of CSI driver and storage nodes, please [see here](k8s-hyperconverged.md).
+
 
 {% include 'prepare-nvme-tcp.md' %}
 
