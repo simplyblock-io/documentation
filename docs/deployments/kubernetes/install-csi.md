@@ -135,7 +135,7 @@ spdkcsi-controller-0   6/6     Running   0          30s
 spdkcsi-node-tzclt     2/2     Running   0          30s
 ```
 
-There are a lot of additional parameters for the helm deployment. You will usually not need them any many relate to the storage node deployment under kubernetes ([hyper-converged](k8s-hyperconverged.m) or [disaggregated](k8s-disaggregated.md)), not the CSI driver itself.
+There are a lot of additional parameters for the helm deployment. You will usually not need them any many relate to the storage node deployment under kubernetes ([hyper-converged](k8s-hyperconverged.md) or [disaggregated](k8s-disaggregated.md)), not the CSI driver itself.
 
 The full list of parameters can be found [here](https://github.com/simplyblock-io/simplyblock-csi/tree/master/charts).
 
