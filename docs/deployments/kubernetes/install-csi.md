@@ -15,14 +15,13 @@ In this section we explain how to install a CSI driver and connect it to a disag
 
 If you are interested in co-located (hyper-converged) deployment of CSI driver and storage nodes, please [see here](k8s-hyperconverged.md).
 
-
-{% include 'prepare-nvme-tcp.md' %}
-
 To install the Simplyblock CSI Driver, a Helm chart is provided. While it can be installed manually, the Helm chart is
 strongly recommended. If a manual installation is preferred, see the
 [CSI Driver Repository](https://github.com/simplyblock-io/simplyblock-csi/blob/master/docs/install-simplyblock-csi-driver.md){:target="_blank" rel="noopener"}.
 
-Either way, the installation requires a few values to be available.
+## Getting Credentials
+
+Credentials are available via cli from any of the control plane nodes.
 
 First, we need the unique cluster id. Note down the cluster UUID of the cluster to access.
 
@@ -125,3 +124,15 @@ NAME                   READY   STATUS    RESTARTS   AGE
 spdkcsi-controller-0   6/6     Running   0          30s
 spdkcsi-node-tzclt     2/2     Running   0          30s
 ```
+
+There are a lot of additional parameters for the CSI driver deployment. You will usually not need them any many relate to the storage node deployment under kubernetes ([hyper-converged](k8s-hyperconverged.m) or [disaggregated](k8s-disaggregated.md)).
+
+The full list of parameters can be found [here](https://github.com/simplyblock-io/simplyblock-csi/tree/master/charts).
+
+Please note that the _storagenode.create_ parameter has to be set to _false_ (it's default) to deploy the CSI driver only.
+
+
+
+
+
+
