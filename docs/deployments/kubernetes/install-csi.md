@@ -3,17 +3,25 @@ title: "Install Simplyblock CSI"
 weight: 30200
 ---
 
-Simplyblock provides a seamless integration with Kubernetes through its Kubernetes CSI driver. For system requirements, see 
-
-[Linux Distributions and Versions](../../reference/supported-linux-distributions.md)
-
-[Linux Kernel Versions](../../reference/supported-linux-kernels.md)
+Simplyblock provides a seamless integration with Kubernetes through its Kubernetes CSI driver. 
 
 Before installing the Kubernetes CSI Driver, a control plane must be present and a storage cluster must have been created.
 
 In this section we explain how to install a CSI driver and connect it to a disaggregated storage cluster, which must already exist prior to the CSI driver installation. The disaggregated cluster can be installed on [plain linux hosts](../install-simplyblock/install-sn.md) or into an [existing kubernetes cluster](k8s-disaggregated.md), but it is not co-located on the same k8s worker nodes with the CSI driver installation. 
 
 If you are interested in co-located (hyper-converged) deployment of CSI driver and storage nodes, please [see here](k8s-hyperconverged.md).
+
+## CSI Driver Architecture 
+
+The CSI driver consists of two parts, a controller part, which communicates to the control plane via the control plane api endpoint, and the node part, which is deployed to and must be present on all nodes with pods attaching simplyblock storage.
+
+The worker node of the node part must fullfill the following requirements:
+
+[Linux Distributions and Versions](../../reference/supported-linux-distributions.md)
+
+[Linux Kernel Versions](../../reference/supported-linux-kernels.md)
+
+## Install Options
 
 To install the Simplyblock CSI Driver, a Helm chart is provided. While it can be installed manually, the Helm chart is
 strongly recommended. If a manual installation is preferred, see the
