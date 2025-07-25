@@ -16,9 +16,11 @@ The storage cluster will however not have any storage nodes attached yet.
 ## CSI Driver and Storage Node System Requirements
 
 System requirements for CSI-only (node part) installation can be found [here](install-csi.md#csi-driver-system-requirements).
-However, for nodes, which serve as storage nodes, the [following requirements]() apply.
+However, for nodes, which serve as storage nodes, the [following requirements](../deployment-planning/recommendations.md#operating-system-requirements-control-plane-storage-nodes) apply.
 
 ## Retrieving the cluster secret
+
+
 
 ## Labelling Nodes
 
